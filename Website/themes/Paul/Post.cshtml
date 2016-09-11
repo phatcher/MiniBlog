@@ -1,4 +1,22 @@
 ﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <nav class="nextPrev">
+        @if (Blog.GetPrevPost() != null)
+        {
+            <a class="pull-left" href="@Blog.GetPrevPost()">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                <span class="hidden-xs">previous post</span>
+            </a>    
+        }
+        @if (Blog.GetNextPost() != null)
+        {
+            <a class="pull-right" href="@Blog.GetNextPost()">
+                 <span class="hidden-xs">next post</span>
+                 <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+        <div class="clearfix"></div>
+    </nav>
+
     <header class="jumbotron">
         <h1 itemprop="headline name">
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
@@ -11,17 +29,35 @@
             </a>
             @Categories()
         </div>
-    </header>    
-    
+    </header>
+
     @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
     {
-        <div id="excerpt" style="display:none;">
+        <div id="excerpt" style="display: none;">
             <h4>Excerpt:</h4>
             <div itemprop="description">@Model.Excerpt</div>
         </div>
     }
 
     <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
+
+    <nav class="nextPrev">
+        @if (Blog.GetPrevPost() != null)
+        {
+            <a class="pull-left" href="@Blog.GetPrevPost()">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                <span class="hidden-xs">previous post</span>
+            </a>
+        }
+        @if (Blog.GetNextPost() != null)
+        {
+            <a class="pull-right" href="@Blog.GetNextPost()">
+                <span class="hidden-xs">next post</span>
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+        <div class="clearfix"></div>
+   </nav>
 
     @if (Blog.CurrentPost != null)
     {

@@ -138,6 +138,32 @@ public static class Blog
         return null;
     }
 
+    public static string GetNextPost()
+    {
+        if (!string.IsNullOrEmpty(CurrentSlug))
+        {
+            var posts = GetVisiblePosts().ToList();
+            var current = posts.IndexOf(CurrentPost);
+            if (current > 0)
+                return posts[current - 1].Url.ToString();
+        }
+
+        return null;
+    }
+
+    public static string GetPrevPost()
+    {
+        if (!string.IsNullOrEmpty(CurrentSlug))
+        {
+            var posts = GetVisiblePosts().ToList();
+            var current = posts.IndexOf(CurrentPost);
+            if (current > -1 && posts.Count > current + 1)
+                return posts[current + 1].Url.ToString();
+        }
+
+        return null;
+    }
+
     public static int CurrentPage
     {
         get

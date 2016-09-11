@@ -63,7 +63,7 @@ input[type], button, textarea {
 
 /*#region Jumbotron */
 .jumbotron {
-    padding: 0.5em 0.2em;
+    padding: 0.5em 0.2em;    
 }
 
 .jumbotron h1 {
@@ -71,6 +71,20 @@ input[type], button, textarea {
 }
 
 /*#endregion */
+
+/*#region article */
+article.post .nextPrev a {
+    padding: 5px 10px;
+    margin: 0 2px 2px;
+    display: inline-block;
+}
+
+.btn-default, .nextPrev a {
+    background-color: #b0e0e6;
+    border-color: #b0e0e6;
+    color: #fff;
+    display: inline-block;
+}
 
 /*#region Post */
 
