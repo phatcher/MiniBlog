@@ -56,7 +56,13 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         {
             post.Slug = PostHandler.CreateSlug(post.Title);    
         }
-        
+
+        // In case new post from WLW and pubdate is empty
+        if (post.PubDate == DateTime.MinValue)
+        {
+            post.PubDate = DateTime.UtcNow;
+        }
+
         post.IsPublished = publish;
         Storage.Save(post);
 
@@ -74,6 +80,12 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Title = post.Title;
             match.Excerpt = post.Excerpt;
             match.Content = post.Content;
+
+            // If posting date is not empty (published date is marked in WLW)  
+            if (post.PubDate != DateTime.MinValue)
+            {
+                match.PubDate = post.PubDate;
+            }
 
             if (!string.Equals(match.Slug, post.Slug, StringComparison.OrdinalIgnoreCase))
                 match.Slug = PostHandler.CreateSlug(post.Slug);

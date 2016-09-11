@@ -15,7 +15,10 @@ public class Post
         Title = "My new post";
         Author = HttpContext.Current.User.Identity.Name;
         Content = "the content";
-        PubDate = DateTime.UtcNow;
+        if (Blog.IsNewPost)
+        {
+            PubDate = DateTime.UtcNow;
+        }
         LastModified = DateTime.UtcNow;
         Categories = new string[0];
         Comments = new List<Comment>();
